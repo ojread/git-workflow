@@ -103,33 +103,43 @@ This is the final step in adding your new feature to the stable codebase on the 
 
 	git checkout master
 	git pull
-	git pull --rebase origin feature-name
+	git pull origin feature-name
 
-Since your feature branch has already been rebased to master, this shouldn't cause any conflicts unless someone has just updated master. If this is the case, checkout your feature branch and repeat step 4.
+Since your feature branch has already been rebased to master, this shouldn't cause any conflicts unless someone has just updated master. If this is the case, checkout your feature branch again and repeat step 4.
 
-Now your local master is up to date with the central repository but also includes your feature branch. When you're certain that everything is working as expected, push it up to the server.
+Your local master is now up to date with the central repository and it also includes your feature branch. When you're certain that everything is still working as expected, push it up to the server.
 
 	git push
 
 Anyone pulling from the central repository will now get your new feature as part of the master branch.
 
 
-## Useful commands
+### 6. Delete your feature branch
 
-Show a summary of the current branch and files that have been changed. Run this often to keep track of what you're doing and which branch you currently have checked out.
+Once your feature is completed and has been sucessfully integrated with master, you can delete the unneeded branches both locally and in the central repository.
+
+	git branch --delete feature-name
+	git push origin --delete feature-name
+
+This just keeps things tidy and allows us to see what's currently being worked on.
+
+
+## Useful commands
 
 	git status
 
-Show a colourful graph that shows how branches are related.
+Show a summary of the current branch and files that have been changed. Run this often to keep track of what you're doing and which branch you currently have checked out.
 
 	git log --graph --oneline --decorate --all
+
+Show a colourful graph that shows how branches are related.
 
 
 ## Reset to an earlier commit
 
-WARNING - this can lose your work. If you've made mistakes and want to roll back your local branch to a previous commit, you can the following.
+WARNING - this will lose your work since the chosen commit. If you've made mistakes and want to revert your local branch to a previous commit, you can do the following.
 
-First, list commits and find the commit that you want to roll back to.
+Firstly, list commits and find the one that you want to revert to.
 
 	git log
 
