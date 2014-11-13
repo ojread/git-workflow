@@ -1,150 +1,87 @@
-# Git workflow for small teams
+# Git workflow for a small team
 
-Git allows multiple people to contribute to the same project without overwriting each other's work. This is a guide to the common tasks that will allow us to work together safely and efficiently.
-
-A similar guide, along with some useful diagrams is available at <https://www.atlassian.com/git/workflows#!workflow-feature-branch>
+We will essentially use this workflow: http://nvie.com/posts/a-successful-git-branching-model/ and the diagrams there are very good at explaining the relationship between branches. This document will list the commands needed to perform common tasks and explain what's happening.
 
 
-## Glossary
-
-* branch - A collection of commits. Any commit can have a new branch created off of it.
-* commit - A version of the project saved to a branch.
-* feature - A section of the project that needs to be implemented.
-* master - The central branch that other branches are based on.
-* origin - The central repository on the server.
-* push - Send changes from your current branch upstream to the server.
-* pull - Fetch changes from another branch and merge them with your current local branch.
-* repository - The collection of all branches that make up a project.
+## General guidelines
+- All day-to-day work should be done on a branch created for the feature or bug that you are working on. Never be tempted to work directly on the develop or master branches.
+- You should regularly run `git status` to check your current branch and see a summary of changes. Always run this before committing changes or pushing to the remote repo.
+- Follow this guide carefully and collaboration will be safe and easy.
 
 
-## Project planning
+## Connect to a remote Git repo
+To share work with others, you first need to connect your local working directory to the shared repository.
 
-Before beginning work on a project, it's important to define its requirements and specify how everything should function. Split the work into individual features that can be implemented one at a time.
+If the repo has already been set up on a service such as GitHub:
+1. Go to the repo's web page and copy its clone URL.
+1. Open a terminal window and navigate to the directory that you want to contain the repo's directory.
+1. `git clone clone-url` - download the repo.
+
+If you have started a project locally and want to add Git support to it:
+1. Create an empty repo on GitHub and copy its clone URL. We will use this as a remote repo where we can share the project with others.
+1. Open a terminal window and navigate to the root directory of your project.
+1. `git init` - set up Git in this directory.
+1. `git add .` - stage all of your files to be saved.
+1. `git commit -m "First commit"` - save a new version locally with a descriptive message. 
+1. `git remote add origin clone-url` - tell Git where to find the remote repo.
+1. `git push -u origin master` - upload your repo to the server.
+
+
+## Start working on a new branch
+1. `git checkout develop` - switch to the branch that you want to base your work on (usually develop).
+1. `git pull` - make sure you have the most recent version from origin.
+1. `git checkout -b feature-name` - create a new branch called feature-name and switch to it.
+
+You can now safely work on the project's files and save versions to this branch.
+
+
+## Save a version of your work locally
+While working on your feature branch, you will want to save versions as you get things working.
+
+1. `git add .` - stage all of your files to be saved.
+1. `git commit -m "Description of changes"` - save a new version locally with a descriptive message.
+
+
+## Revert to an earlier version
+WARNING this will lose your work since the chosen commit. If you tried something that didn't work and want to revert to a previous commit, you can do the following:
+
+1. `git log` - list commits and find the one that you want to revert to. Copy its hash.
+1. `git checkout hash` - switch to the commit with the given hash.
+1. `git reset --hard` - clear commits ahead of this one.
+1. `git checkout` - refresh the current branch.
+
+
+## Push your local branch up to the remote repo
+This will back up your work and allow other team members to access what you've done.
+
+`git push -u origin feature-name` - upload your branch to the server.
+
+To push this branch again, you only have to enter `git push` in the future.
+
+
+## Merge your finished feature into the develop branch
+Once your feature is complete and fully tested, it is ready to be merged into the develop branch.
+
+1. `git checkout develop` - switch to the develop branch.
+1. DO WE NEED TO PULL THE LATEST?
+1. `git merge --no-ff feature-name` - combine the two branches, retaining their relationship.
+1. There are likely to be conflicts between files that have been altered on both branches. Edit these files and make sure that your changes are compatible and don't break anything.
+1. `git branch -d feature-name` - delete your local branch if you don't need it any more.
+1. `git push origin develop` - push your combined branch to the server.
+
+
+
+
+# Useful commands
+
+`git status` - Show a summary of the current branch and files that have been changed. Run this often to keep track of what you're doing and which branch you currently have checked out.
+
+`git log --graph --oneline --decorate --all` - Show a colourful graph that shows how branches are related.
 
 
 ## Cache your GitHub credentials
 
 Accessing GitHub with HTTPS is much easier to set up than SSH, plus it also works through strict firewalls and proxies when SSH may fail. However, it gets annoying to type your username and password all the time. You can tell Git to remember your credentials for an hour by entering the following.
 
-	git config --global credential.helper cache
-	git config --global credential.helper 'cache --timeout=3600'
-
-
-## Setting up a repository
-
-If you are starting a new repository, log into the GitHub website and create a new repository. If someone has already created it, they will send you the link for it.
-
-On the repository's web page copy the HTTPS clone URL and use it in the following command.
-
-	git clone URL
-
-This will create a directory to hold the project. Run git commands in that directory to interact with the repository.
-
-
-## Feature branch workflow
-
-In this workflow, each individual feature is branched off of the master branch and then merged back in once complete. The master branch should only ever contain stable, well-tested code because new features will be based on it. Feature branches can still be shared for multiple people to work on and test without affecting master.
-
-
-### 1. Begin working on a feature
-
-Make sure you are starting with the latest version of master.
-	
-	git checkout master
-	git pull
-
-Create a new local branch and check it out to work on it.
-
-	git checkout -b feature-name
-
-You can now work on the project files safely without affecting the master branch.
-
-
-### 2. Save a version of your work locally
-
-Once you have reached a milestone in the development of your feature, you will want to save what you have done as a new version.
-
-Check the files that have been changed, stage all changes to be saved and commit them with a description.
-
-	git status
-	git add .
-	git commit -m "Short description of the changes"
-
-
-### 3. Push your local branch to the server
-
-Back up your work and allow other team members to access what you've done.
-
-	git push -u origin feature-name
-
-After you have done this the first time, you can just run the following in the future.
-
-	git push
-
-Once you have finished and tested your feature, make sure you push the final version up to the server.
-
-
-### 4. Synchronise your branch with master
-
-While you are working on your feature, the master branch is likely to be updated by other members of the team. If so, the version that your feature branch was based on will now be out of date. Before you can publish your feature, you need to make sure that it is compatible with the latest version of the master branch.
-
-	git pull --rebase origin master
-
-This downloads the central repository's latest version of the master branch and then applies your feature branch's commits to it locally. You may have to resolve some conflicts if files have been edited by other people.
-
-Once you have resolved these conflicts, your local feature branch will be based on the latest version of the master branch. Push it up to the server so that other members of the team can check it out for testing.
-	
-	git push
-
-
-### 5. Publish your feature to master
-
-This is the final step in adding your new feature to the stable codebase on the master branch. The whole team's work is based on this branch so you need to be sure that you haven't introduced bugs that will affect other people. However, in reality bugs will always arise and they should be fixed by starting a new branch specifically to deal with them.
-
-	git checkout master
-	git pull
-	git pull origin feature-name
-
-Since your feature branch has already been rebased to master, this shouldn't cause any conflicts unless someone has just updated master. If this is the case, checkout your feature branch again and repeat step 4.
-
-Your local master is now up to date with the central repository and it also includes your feature branch. When you're certain that everything is still working as expected, push it up to the server.
-
-	git push
-
-Anyone pulling from the central repository will now get your new feature as part of the master branch.
-
-
-### 6. Delete your feature branch
-
-Once your feature is completed and has been sucessfully integrated with master, you can delete the unneeded branches both locally and in the central repository.
-
-	git branch --delete feature-name
-	git push origin --delete feature-name
-
-This just keeps things tidy and allows us to see what's currently being worked on.
-
-
-## Useful commands
-
-	git status
-
-Show a summary of the current branch and files that have been changed. Run this often to keep track of what you're doing and which branch you currently have checked out.
-
-	git log --graph --oneline --decorate --all
-
-Show a colourful graph that shows how branches are related.
-
-
-## Reset to an earlier commit
-
-WARNING - this will lose your work since the chosen commit. If you've made mistakes and want to revert your local branch to a previous commit, you can do the following.
-
-Firstly, list commits and find the one that you want to revert to.
-
-	git log
-
-Copy the hash for that commit and check it out.
-
-	git checkout hash
-	git reset --hard
-	git checkout
+	git config-global credential.helper cache
+	git config-global credential.helper 'cache --timeout=3600'
