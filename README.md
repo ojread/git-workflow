@@ -4,20 +4,24 @@ We will essentially use this workflow: http://nvie.com/posts/a-successful-git-br
 
 
 ## General guidelines
+
 - All day-to-day work should be done on a branch created for the feature or bug that you are working on. Never be tempted to work directly on the develop or master branches.
 - You should regularly run `git status` to check your current branch and see a summary of changes. Always run this before committing changes or pushing to the remote repo.
 - Follow this guide carefully and collaboration will be safe and easy.
 
 
 ## Connect to a remote Git repo
+
 To share work with others, you first need to connect your local working directory to the shared repository.
 
 If the repo has already been set up on a service such as GitHub:
+
 1. Go to the repo's web page and copy its clone URL.
 1. Open a terminal window and navigate to the directory that you want to contain the repo's directory.
 1. `git clone clone-url` - download the repo.
 
 If you have started a project locally and want to add Git support to it:
+
 1. Create an empty repo on GitHub and copy its clone URL. We will use this as a remote repo where we can share the project with others.
 1. Open a terminal window and navigate to the root directory of your project.
 1. `git init` - set up Git in this directory.
@@ -28,6 +32,7 @@ If you have started a project locally and want to add Git support to it:
 
 
 ## Start working on a new branch
+
 1. `git checkout develop` - switch to the branch that you want to base your work on (usually develop).
 1. `git pull` - make sure you have the most recent version from origin.
 1. `git checkout -b feature-name` - create a new branch called feature-name and switch to it.
@@ -36,6 +41,7 @@ You can now safely work on the project's files and save versions to this branch.
 
 
 ## Save a version of your work locally
+
 While working on your feature branch, you will want to save versions as you get things working.
 
 1. `git add .` - stage all of your files to be saved.
@@ -43,6 +49,7 @@ While working on your feature branch, you will want to save versions as you get 
 
 
 ## Revert to an earlier version
+
 WARNING this will lose your work since the chosen commit. If you tried something that didn't work and want to revert to a previous commit, you can do the following:
 
 1. `git log` - list commits and find the one that you want to revert to. Copy its hash.
@@ -52,6 +59,7 @@ WARNING this will lose your work since the chosen commit. If you tried something
 
 
 ## Push your local branch up to the remote repo
+
 This will back up your work and allow other team members to access what you've done.
 
 `git push -u origin feature-name` - upload your branch to the server.
@@ -60,6 +68,7 @@ To push this branch again, you only have to enter `git push` in the future.
 
 
 ## Merge your finished feature into the develop branch
+
 Once your feature is complete and fully tested, it is ready to be merged into the develop branch.
 
 1. `git checkout develop` - switch to the develop branch.
