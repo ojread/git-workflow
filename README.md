@@ -1,19 +1,18 @@
-# Git workflow for a small team
+# Git workflow for small teams
 
-We will essentially use this workflow: http://nvie.com/posts/a-successful-git-branching-model/ and the diagrams there are very good at explaining the relationship between branches. This document will list the commands needed to perform common tasks and explain what's happening.
+We will essentially use this workflow: http://nvie.com/posts/a-successful-git-branching-model/ and the diagrams there explain the relationship between branches. This document will list the commands needed to perform common tasks and explain what's happening.
 
 
 ## General guidelines
 
-- All day-to-day work should be done on a branch created for the feature or bug that you are working on. Never be tempted to work directly on the develop or master branches.
-- The master branch 
-- Regularly run `git status` to check your current branch and see a summary of changes. Always do this before committing changes to avoid creating a mess.
+- All work should be done on a branch created for the feature or bug that you are working on. Never be tempted to work directly on the develop or master branches.
+- The master branch should only ever contain well-tested code from the develop branch and the project lead is responsible for this. It should always be in a state to deploy to a live server for the customer to see.
 - Follow this guide carefully and collaboration will be safe and easy.
 
 
 ## Connect to a remote Git repo
 
-To share work with others, you first need to connect your local working directory to the shared repository.
+The first thing you need to do to share work with others is to connect your local working directory to the shared repository.
 
 If the repo has already been set up on a service such as GitHub:
 
@@ -35,18 +34,21 @@ If you have started a project locally and want to add Git support to it:
 
 In this example, we are beginning work on a contact form for a website.
 
-1. ### Start working on a new feature.
-	1. `git checkout develop` - Switch to the branch that you want to base your work on.
+1. ** Start working on a new feature. **
+
+	1. `git checkout develop` - Switch to the branch that you want to base your work on, usually develop.
 	1. `git pull` - Make sure you have the latest version.
 	1. `git checkout -b contact-form` - Create a branch to work on the new feature and switch to it.
 
-1. ### Develop the feature
+1. ** Develop the feature. **
+
 	1. Work on the feature in the project directory until you want to save your progress.
 	1. `git status` - Check you are still on the correct branch and see a summary of the changes you have made.
-	1. `git commit -am  "Description of changes"` - Save a new version of your work.
+	1. `git commit -am  "Added email contact form"` - Save all of your work as a new version with a description of the changes.
 	1. Repeat until the feature is complete and fully tested.
 
-1. ### Add your feature to the main development branch.
+1. ** Add your feature to the main development branch. **
+
 	1. `git checkout develop` - Switch back to the parent branch.
 	1. `git pull` - Make sure you have the latest version.
 	1. `git merge --no-ff contact-form` - Add your work to the develop branch. The --no-ff option preserves the history of the feature branch.
@@ -58,7 +60,9 @@ In this example, we are beginning work on a contact form for a website.
 
 ## Other useful commands
 
-### Show the log of commits
+`git status` - Check your current branch and see a summary of changes. Always do this before committing changes to avoid working on the wrong branch.
+
+`git stash` - If you do begin to work on the wrong branch, stash your work, switch to the correct branch and run `git stash pop` to reapply it there.
 
 `git log --graph --oneline --decorate --all` - Show a colourful graph that shows how branches and commits are related.
 
