@@ -52,12 +52,12 @@ In this example, we are beginning work on a contact form for a website.
 	1. `git checkout develop` - Switch back to the parent branch.
 	1. `git pull` - Make sure you have the latest version.
 	1. `git merge --no-ff contact-form` - Add your work to the develop branch. The --no-ff option preserves the history of the feature branch.
-	1. Resolve any conflicts between the branches and follow the prompts to complete the merge. Check that your feature is still working and not conflicting with other people's work.
+	1. Resolve any conflicts between the branches and follow the prompts to complete the merge. Check that your feature is still working and not conflicting with anyone else's work.
 	1. `git branch -d contact-form` - Delete the feature branch once it is no longer needed.
 	1. `git push origin develop` - Upload your updated branch for others to access.
 
 
-## Other useful commands
+## Useful commands
 
 `git status` - Check your current branch and see a summary of changes. Always do this before committing changes to avoid working on the wrong branch.
 
