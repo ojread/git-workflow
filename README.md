@@ -1,4 +1,4 @@
-# Git workflow for small teams
+# Git workflow for a small team
 
 We will essentially use this workflow: http://nvie.com/posts/a-successful-git-branching-model/ and the diagrams there explain the relationship between branches. This document will list the commands needed to perform common tasks and explain what's happening.
 
