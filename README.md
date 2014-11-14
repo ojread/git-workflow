@@ -57,7 +57,6 @@ In this example, we are beginning work on a contact form for a website.
 	1. `git push origin develop` - Upload your updated branch for others to access.
 
 
-
 ## Other useful commands
 
 `git status` - Check your current branch and see a summary of changes. Always do this before committing changes to avoid working on the wrong branch.
@@ -71,15 +70,15 @@ In this example, we are beginning work on a contact form for a website.
 
 Accessing GitHub with HTTPS is much easier to set up than SSH, plus it also works through strict firewalls and proxies when SSH may fail. However, it gets annoying to type your username and password all the time. You can tell Git to remember your credentials for an hour by entering the following.
 
-	git config-global credential.helper cache
-	git config-global credential.helper 'cache --timeout=3600'
+	git config --global credential.helper cache
+	git config --global credential.helper 'cache --timeout=3600'
 
 
 ### Revert to an earlier version
 
 WARNING - this will delete your work since the chosen commit. If you tried something that didn't work out and want to revert to a previous commit, you can do the following:
 
-1. `git log` - list commits and find the one that you want to revert to. Copy its hash.
-1. `git checkout hash` - switch to the commit with the given hash.
-1. `git reset --hard` - clear commits ahead of this one.
-1. `git checkout` - refresh the current branch.
+1. `git log` - Find the commit that you want to revert to and copy its hash.
+1. `git checkout hash` - Switch to the commit with the given hash.
+1. `git reset --hard` - Delete commits ahead of this one.
+1. `git checkout` - Refresh the current branch.
