@@ -12,7 +12,7 @@ We will essentially use this workflow: http://nvie.com/posts/a-successful-git-br
 
 ## Connect to a remote Git repo
 
-The first thing you need to do to share work with others is to connect your local working directory to the shared repository.
+The first thing you need to do to share work with others is to connect your local working directory to the remote repository.
 
 If the repo has already been set up on a service such as GitHub:
 
