@@ -34,20 +34,20 @@ If you have started a project locally and want to add Git support to it:
 
 In this example, we are beginning work on a contact form for a website.
 
-1. ** Start working on a new feature. **
+1. **Prepare to work on a new feature**
 
 	1. `git checkout develop` - Switch to the branch that you want to base your work on, usually develop.
 	1. `git pull` - Make sure you have the latest version.
 	1. `git checkout -b contact-form` - Create a branch to work on the new feature and switch to it.
 
-1. ** Develop the feature. **
+1. **Develop the feature**
 
 	1. Work on the feature in the project directory until you want to save your progress.
 	1. `git status` - Check you are still on the correct branch and see a summary of the changes you have made.
 	1. `git commit -am  "Added email contact form"` - Save all of your work as a new version with a description of the changes.
 	1. Repeat until the feature is complete and fully tested.
 
-1. ** Add your feature to the main development branch. **
+1. **Add your feature to the main development branch**
 
 	1. `git checkout develop` - Switch back to the parent branch.
 	1. `git pull` - Make sure you have the latest version.
