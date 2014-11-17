@@ -60,7 +60,7 @@ In this example, we are beginning work on a contact form for a website.
 
 `git status` - Check which branch you are working on and see a summary of changes. Always do this before starting work or committing changes to avoid working on the wrong branch.
 
-If you do begin to work on the wrong branch, stash your work with `git stash`, switch to the correct branch with `git checkout branch-name` and run `git stash pop` to reapply your work there.
+If you do begin to work on the wrong branch, stash your changes with `git stash`, switch to the correct branch with `git checkout branch-name` and run `git stash pop` to reapply your work there.
 
 `git log --graph --oneline --decorate --all` - Show a colourful graph that shows how branches and commits are related.
 
