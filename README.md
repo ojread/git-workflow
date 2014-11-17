@@ -1,18 +1,18 @@
 # Git workflow for a small team
 
-We will essentially use this workflow: http://nvie.com/posts/a-successful-git-branching-model/ and the diagrams there explain the relationship between branches. This document will list the commands needed to perform common tasks and explain what's happening.
+We will essentially use this workflow: http://nvie.com/posts/a-successful-git-branching-model/ and the diagrams there explain the relationship between branches. This document will list the commands needed to perform common tasks and explain what's happening. This is a work in progress so if you have any suggestions, you can submit them through a pull request on GitHub.
 
 
 ## General guidelines
 
 - All work should be done on a branch created for the feature or bug that you are working on. Never be tempted to work directly on the develop or master branches.
-- The master branch should only ever contain well-tested code from the develop branch and the project lead is responsible for this. It should always be in a state to deploy to a live server for the customer to see.
+- The master branch should only ever contain well-tested code from the develop branch. The lead developer on a project is responsible for this and no-one else should push to it.
 - Follow this guide carefully and collaboration will be safe and easy.
 
 
 ## Connect to a remote Git repo
 
-The first thing you need to do to share work with others is to connect your local working directory to the remote repository.
+Before you can share your work with others, you need to to connect your local working directory to the remote repository.
 
 If the repo has already been set up on a service such as GitHub:
 
@@ -26,7 +26,7 @@ If you have started a project locally and want to add Git support to it:
 1. Open a terminal window and navigate to the root directory of your project.
 1. `git init` - Set up Git in this directory.
 1. `git remote add origin clone-url` - Tell Git where to find the remote repo.
-1. `git commit -am "First commit"` - Save a new version locally with a descriptive message. 
+1. `git commit -am "First commit"` - Save your initial version locally with a message. 
 1. `git push -u origin master` - Upload your repo to the server.
 
 
@@ -50,14 +50,13 @@ In this example, we are beginning work on a contact form for a website.
 1. **Add your feature to the main development branch**
 
 	1. `git checkout develop` - Switch back to the parent branch.
-	1. `git pull` - Make sure you have the latest version.
-	1. `git merge --no-ff contact-form` - Add your work to the develop branch. The --no-ff option preserves the history of the feature branch.
-	1. Resolve any conflicts between the branches and follow the prompts to complete the merge. Check that your feature is still working and not conflicting with anyone else's work.
+	1. `git pull --no-ff contact-form` - Fetch the latest version of the develop branch and combine it with your feature branch. The --no-ff option preserves the history of the feature branch and keeps the shared branch clean.
+	1. Resolve any conflicts between the branches and follow the prompts to complete the merge. Check that your feature is still working and does not conflict with anyone else's work.
 	1. `git branch -d contact-form` - Delete the feature branch once it is no longer needed.
 	1. `git push origin develop` - Upload your updated branch for others to access.
 
 
-## Useful commands
+## Other useful commands
 
 `git status` - Check your current branch and see a summary of changes. Always do this before committing changes to avoid working on the wrong branch.
 
