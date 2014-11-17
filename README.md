@@ -26,7 +26,8 @@ If you have started a project locally and want to add Git support to it:
 1. Open a terminal window and navigate to the root directory of your project.
 1. `git init` - Set up Git in this directory.
 1. `git remote add origin clone-url` - Tell Git where to find the remote repo.
-1. `git commit -am "First commit"` - Save your initial version locally with a message. 
+1. `git add .` - Stage all files to be saved.
+1. `git commit -m "Initial commit"` - Save your initial version locally with a message. 
 1. `git push -u origin master` - Upload your repo to the server.
 
 
@@ -44,7 +45,8 @@ In this example, we are beginning work on a contact form for a website.
 
 	1. Work on the files in the project directory until you want to save your progress.
 	1. `git status` - Check you are still on the correct branch and see a summary of the changes you have made.
-	1. `git commit -am  "Added email contact form"` - Save all of your work as a new version with a description of the changes.
+	1. `git add .` - Stage all files to be saved.
+	1. `git commit -m  "Added email contact form"` - Save all of your work as a new version with a description of the changes.
 	1. Repeat until the feature is complete and fully tested.
 
 1. **Add your feature to the main development branch**
@@ -60,9 +62,17 @@ In this example, we are beginning work on a contact form for a website.
 
 `git status` - Check which branch you are working on and see a summary of changes. Always do this before starting work or committing changes to avoid working on the wrong branch.
 
-If you do begin to work on the wrong branch, stash your changes with `git stash`, switch to the correct branch with `git checkout branch-name` and run `git stash pop` to reapply your work there.
-
 `git log --graph --oneline --decorate --all` - Show a colourful graph that shows how branches and commits are related.
+
+
+### Stash changes
+
+If you do begin to work on the wrong branch:
+
+- `git stash` - Remove your changes but store them in memory.
+- `git checkout branch-name` - Switch to the correct branch.
+- `git stash pop` - Reapply your work there.
+- Continue working or commit your work to the correct branch.
 
 
 ### Cache your GitHub credentials
@@ -73,11 +83,10 @@ Accessing GitHub with HTTPS is much easier to set up than SSH, plus it also work
 	git config --global credential.helper 'cache --timeout=3600'
 
 
-### Revert to an earlier version
+### Undo a commit
 
-WARNING - this will delete your work since the chosen commit. If you tried something that didn't work out and want to revert to a previous commit, you can do the following:
+This will create a new commit that undoes all the changes from a previous commit. This is safe and doesn't actually delete anything from the project's history.
 
 1. `git log` - Find the commit that you want to revert to and copy its hash.
-1. `git checkout hash` - Switch to the commit with the given hash.
-1. `git reset --hard` - Delete commits ahead of this one.
-1. `git checkout` - Refresh the current branch.
+1. `git revert hash` - Undo the selected commit.
+1. If you have more than one commit, you may have to resolve any conflicts.
