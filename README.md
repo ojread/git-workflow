@@ -26,7 +26,7 @@ If you have started a project locally and want to add Git support to it:
 1. Open a terminal window and navigate to the root directory of your project.
 1. `git init` - Set up Git in this directory.
 1. `git remote add origin clone-url` - Tell Git where to find the remote repo.
-1. `git add .` - Stage all files to be saved.
+1. `git add -A` - Stage all files to be saved.
 1. `git commit -m "Initial commit"` - Save your initial version locally with a message. 
 1. `git push -u origin master` - Upload your repo to the server.
 
@@ -45,7 +45,7 @@ In this example, we are beginning work on a contact form for a website.
 
 	1. Work on the files in the project directory until you want to save your progress.
 	1. `git status` - Check you are still on the correct branch and see a summary of the changes you have made.
-	1. `git add .` - Stage all files to be saved.
+	1. `git add -A` - Stage all files to be saved.
 	1. `git commit -m  "Added email contact form"` - Save all of your work as a new version with a description of the changes.
 	1. Repeat until the feature is complete and fully tested.
 
